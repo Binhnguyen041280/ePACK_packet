@@ -37,7 +37,21 @@ Giải nén ePACK.zip vào thư mục mong muốn:
 
 ---
 
-## Bước 2: Chạy Setup (1 lần duy nhất)
+## Bước 2: Mở Terminal / Command Prompt
+
+### 🍎 macOS:
+1. **Cách 1:** Nhấn `Cmd + Space`, gõ "Terminal", nhấn Enter
+2. **Cách 2:** Mở Finder → Applications → Utilities → Terminal
+3. **Cách 3 (khuyến nghị):** Click chuột phải vào folder ePACK → *"New Terminal at Folder"*
+
+### 🪟 Windows:
+1. **Cách 1:** Nhấn `Win + R`, gõ "cmd", nhấn Enter
+2. **Cách 2:** Click vào thanh địa chỉ trong File Explorer → gõ "cmd" → nhấn Enter
+3. **Cách 3:** Click chuột phải vào folder ePACK → *"Open in Terminal"*
+
+---
+
+## Bước 3: Chạy Setup (1 lần duy nhất)
 
 ### macOS/Linux:
 ```bash
@@ -69,7 +83,7 @@ Securing .env file...
 
 ---
 
-## Bước 3: Khởi Động ePACK
+## Bước 4: Khởi Động ePACK
 
 ### macOS/Linux:
 ```bash
@@ -120,7 +134,7 @@ epack-frontend   epack-frontend:latest   Up (healthy)
 
 ---
 
-## Bước 4: Truy Cập Ứng Dụng
+## Bước 5: Truy Cập Ứng Dụng
 
 Mở browser: **http://localhost:3000**
 
@@ -128,7 +142,7 @@ Lần đầu sẽ thấy trang signup/authentication.
 
 ---
 
-## Bước 5: Dừng ePACK (Khi Cần)
+## Bước 6: Dừng ePACK (Khi Cần)
 
 ### macOS/Linux:
 ```bash
@@ -144,7 +158,7 @@ Lần đầu sẽ thấy trang signup/authentication.
 
 ---
 
-## Bước 6: Khởi Động Lại
+## Bước 7: Khởi Động Lại
 
 Sau khi stop, chỉ cần chạy lại:
 

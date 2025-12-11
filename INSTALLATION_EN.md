@@ -38,7 +38,21 @@ Extract ePACK.zip to your preferred location:
 
 ---
 
-## Step 2: Run Setup (One-time only)
+## Step 2: Open Terminal / Command Prompt
+
+### 🍎 macOS:
+1. **Option 1:** Press `Cmd + Space`, type "Terminal", press Enter
+2. **Option 2:** Open Finder → Applications → Utilities → Terminal
+3. **Option 3 (recommended):** Right-click on ePACK folder → *"New Terminal at Folder"*
+
+### 🪟 Windows:
+1. **Option 1:** Press `Win + R`, type "cmd", press Enter
+2. **Option 2:** Click on address bar in File Explorer → type "cmd" → press Enter
+3. **Option 3:** Right-click on ePACK folder → *"Open in Terminal"*
+
+---
+
+## Step 3: Run Setup (One-time only)
 
 ### macOS/Linux:
 ```bash
@@ -70,7 +84,7 @@ Securing .env file...
 
 ---
 
-## Step 3: Start ePACK
+## Step 4: Start ePACK
 
 ### macOS/Linux:
 ```bash
@@ -121,7 +135,7 @@ epack-frontend   epack-frontend:latest   Up (healthy)
 
 ---
 
-## Step 4: Access Application
+## Step 5: Access Application
 
 Open browser: **http://localhost:3000**
 
@@ -129,7 +143,7 @@ You will see the signup/authentication page on first access.
 
 ---
 
-## Step 5: Stop ePACK (When Needed)
+## Step 6: Stop ePACK (When Needed)
 
 ### macOS/Linux:
 ```bash
@@ -145,7 +159,7 @@ You will see the signup/authentication page on first access.
 
 ---
 
-## Step 6: Restart
+## Step 7: Restart
 
 After stopping, simply run again:
 
