@@ -41,14 +41,20 @@ Extract ePACK.zip to your preferred location:
 ## Step 2: Open Terminal / Command Prompt
 
 ### 🍎 macOS:
-1. **Option 1:** Press `Cmd + Space`, type "Terminal", press Enter
-2. **Option 2:** Open Finder → Applications → Utilities → Terminal
-3. **Option 3 (recommended):** Right-click on ePACK folder → *"New Terminal at Folder"*
+**Run .sh file with Terminal:**
+1. Right-click on `setup_prod.sh` (or `start.sh`)
+2. Select **"Open With"** → **"Other..."**
+3. In the dialog, select **"All Applications"** (at bottom)
+4. Find and select **Terminal** → Click **Open**
+
+> 💡 **Tip:** After the first time, Terminal will appear in the "Open With" menu
 
 ### 🪟 Windows:
-1. **Option 1:** Press `Win + R`, type "cmd", press Enter
-2. **Option 2:** Click on address bar in File Explorer → type "cmd" → press Enter
-3. **Option 3:** Right-click on ePACK folder → *"Open in Terminal"*
+**Run .bat file:**
+1. Double-click on `setup_prod.bat` (or `start.bat`)
+2. If SmartScreen warning appears, click **"More info"** → **"Run anyway"**
+
+> 💡 **Tip:** Or right-click → **"Run as administrator"** if admin rights needed
 
 ---
 

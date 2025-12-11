@@ -40,14 +40,20 @@ Giải nén ePACK.zip vào thư mục mong muốn:
 ## Bước 2: Mở Terminal / Command Prompt
 
 ### 🍎 macOS:
-1. **Cách 1:** Nhấn `Cmd + Space`, gõ "Terminal", nhấn Enter
-2. **Cách 2:** Mở Finder → Applications → Utilities → Terminal
-3. **Cách 3 (khuyến nghị):** Click chuột phải vào folder ePACK → *"New Terminal at Folder"*
+**Chạy file .sh bằng Terminal:**
+1. Click chuột phải vào file `setup_prod.sh` (hoặc `start.sh`)
+2. Chọn **"Open With"** → **"Other..."**
+3. Trong cửa sổ mở ra, chọn **"All Applications"** (ở dưới cùng)
+4. Tìm và chọn **Terminal** → Click **Open**
+
+> 💡 **Tip:** Sau lần đầu, Terminal sẽ xuất hiện trong menu "Open With"
 
 ### 🪟 Windows:
-1. **Cách 1:** Nhấn `Win + R`, gõ "cmd", nhấn Enter
-2. **Cách 2:** Click vào thanh địa chỉ trong File Explorer → gõ "cmd" → nhấn Enter
-3. **Cách 3:** Click chuột phải vào folder ePACK → *"Open in Terminal"*
+**Chạy file .bat:**
+1. Double-click vào file `setup_prod.bat` (hoặc `start.bat`)
+2. Nếu có cảnh báo SmartScreen, chọn **"More info"** → **"Run anyway"**
+
+> 💡 **Tip:** Hoặc click chuột phải → **"Run as administrator"** nếu cần quyền admin
 
 ---
 
