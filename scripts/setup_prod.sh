@@ -102,7 +102,29 @@ sed "${SED_OPTS[@]}" "s|<REPLACE_WITH_YOUR_ENCRYPTION_KEY>|$ENCRYPTION_KEY|g" .e
 echo "Securing .env file..."
 chmod 600 .env
 
-# 6. Create data directories (including input placeholder)
+# 6. Add EPACK_INSTALL_DIR to .env for auto-restart capability
+echo "" >> .env
+echo "# Installation directory for auto-restart" >> .env
+echo "EPACK_INSTALL_DIR=$PROJECT_ROOT" >> .env
+
+# 7. Add scripts mount to docker-compose.yml for auto-restart from container
+echo "Adding scripts mount to docker-compose.yml..."
+if [ -f docker-compose.yml ]; then
+    # Check if scripts mount already exists
+    if ! grep -q "./scripts:/app/scripts" docker-compose.yml; then
+        # Use sed to add scripts mount after .env mount line
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            sed -i '' 's|      - ./.env:/app/.env:rw|      - ./.env:/app/.env:rw\n      - ./scripts:/app/scripts:ro|g' docker-compose.yml
+        else
+            sed -i 's|      - ./.env:/app/.env:rw|      - ./.env:/app/.env:rw\n      - ./scripts:/app/scripts:ro|g' docker-compose.yml
+        fi
+        echo "✅ Scripts mount added to docker-compose.yml"
+    else
+        echo "ℹ️  Scripts mount already exists in docker-compose.yml"
+    fi
+fi
+
+# 8. Create data directories (including input placeholder)
 echo "Creating data directories..."
 DATA_DIR="${HOME}/docker/volumes/epack"
 mkdir -p "$DATA_DIR/database"
@@ -117,5 +139,9 @@ echo "Data directory created: $DATA_DIR"
 echo -e "${GREEN}=== Setup Complete! ===${NC}"
 echo -e "1. Configuration saved to: ${YELLOW}.env${NC}"
 echo -e "2. Secret keys generated and applied."
-echo -e "3. You can now start the application with:"
-echo -e "   ${GREEN}docker-compose up -d${NC}"
+echo -e "3. Scripts mount added for auto-restart capability."
+echo ""
+
+# 9. Auto-start ePACK
+echo -e "${GREEN}🚀 Starting ePACK automatically...${NC}"
+./scripts/start.sh

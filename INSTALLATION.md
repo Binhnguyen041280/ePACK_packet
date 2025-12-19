@@ -1,85 +1,230 @@
-# ePACK - Hướng Dẫn Cài Đặt
+# ePACK - Hướng Dẫn Cài Đặt Cho Người Mới Bắt Đầu
 
-## Yêu Cầu Hệ Thống
-
-- Docker Desktop (latest version)
-- macOS 11+, Windows 10/11, or Ubuntu 20.04+
-- 8GB RAM minimum
-- 20GB free disk space
+> 📌 **Dành cho người chưa biết gì về kỹ thuật** - Hướng dẫn này sẽ đưa bạn qua từng bước một cách chi tiết.
 
 ---
 
-## Cấu Trúc Package
+## 🤖 Bước 0: Cài Đặt ChatGPT Atlas (Khuyến Nghị Cao)
 
+> [!TIP]
+> **ChatGPT Atlas** là trợ lý AI có thể đọc và hiểu tài liệu hướng dẫn. Cài đặt trước để có người hỗ trợ bạn 24/7!
+
+### Tại sao nên cài ChatGPT Atlas?
+
+- ✅ Có thể hỏi bất kỳ câu hỏi nào về ePACK
+- ✅ Hướng dẫn cài đặt từng bước theo ngữ cảnh của bạn
+- ✅ Giải đáp lỗi và troubleshooting ngay lập tức
+- ✅ Hoạt động như một chuyên gia kỹ thuật cá nhân
+
+### Yêu cầu hệ thống cho ChatGPT Atlas:
+
+| Thành phần | Yêu cầu |
+|------------|---------|
+| **macOS** | macOS 12 (Monterey) trở lên, chip Apple Silicon (M1/M2/M3/M4) |
+| **Windows** | Sắp ra mắt (coming soon) |
+| **Tài khoản** | Cần có tài khoản ChatGPT (miễn phí hoặc trả phí) |
+
+> [!NOTE]
+> Hiện tại ChatGPT Atlas chỉ hỗ trợ **macOS với Apple Silicon**. Nếu bạn dùng Windows hoặc Mac Intel, bạn có thể sử dụng ChatGPT web tại https://chat.openai.com thay thế.
+
+### Cách cài đặt ChatGPT Atlas (macOS):
+
+1. **Tải trình duyệt:**
+   - Mở trình duyệt bất kỳ (Safari, Chrome...)
+   - Truy cập: **https://chatgpt.com/atlas**
+   - Click **"Download for macOS"**
+   - File `.dmg` sẽ được tải về
+
+2. **Cài đặt:**
+   - Mở file `.dmg` vừa tải từ thư mục Downloads
+   - Kéo biểu tượng **Atlas** vào thư mục **Applications**
+   - Đóng cửa sổ và eject disk image
+
+3. **Khởi động và đăng nhập:**
+   - Mở Atlas từ Applications hoặc tìm kiếm Spotlight
+   - Chấp nhận các yêu cầu bảo mật của macOS nếu có
+   - Đăng nhập bằng tài khoản ChatGPT của bạn
+   - (Tùy chọn) Import bookmarks từ Chrome/Safari nếu muốn
+
+> [!IMPORTANT]
+> **Sau khi cài xong ChatGPT Atlas**, bạn có thể insert file `INSTALLATION.md` này vào chat và yêu cầu:
+> 
+> *"Hướng dẫn tôi cài đặt ePACK từng bước theo file này"*
+> 
+> ChatGPT Atlas sẽ đọc hiểu và hướng dẫn bạn chi tiết!
+
+---
+
+## 🐳 Bước 1: Cài Đặt Docker Desktop
+
+> [!CAUTION]
+> **Docker Desktop là BẮT BUỘC** - ePACK chạy hoàn toàn trên Docker. Không cài Docker = Không chạy được ePACK.
+
+### Yêu Cầu Hệ Thống Tối Thiểu
+
+| Thành phần | Yêu cầu tối thiểu | Khuyến nghị |
+|------------|-------------------|-------------|
+| **RAM** | 8 GB | 16 GB |
+| **Ổ cứng trống** | 20 GB | 50 GB |
+| **CPU** | 2 cores | 4 cores |
+| **Hệ điều hành** | Xem bên dưới | - |
+
+### Hệ Điều Hành Được Hỗ Trợ
+
+| OS | Phiên bản tối thiểu | Ghi chú |
+|----|---------------------|---------|
+| 🍎 **macOS** | macOS 11 (Big Sur) trở lên | Intel hoặc Apple Silicon |
+| 🪟 **Windows** | Windows 10/11 (64-bit) | Cần bật WSL2 |
+| 🐧 **Linux** | Ubuntu 20.04+ | Hoặc các distro tương đương |
+
+### Cách Cài Docker Desktop
+
+#### 🍎 macOS:
+
+1. Truy cập: https://www.docker.com/products/docker-desktop/
+2. Click **"Download for Mac"**
+   - Chọn **Apple Chip** nếu dùng Mac M1/M2/M3
+   - Chọn **Intel Chip** nếu dùng Mac cũ hơn
+3. Mở file `.dmg` đã tải
+4. Kéo biểu tượng **Docker** vào thư mục **Applications**
+5. Mở Docker Desktop từ Applications
+6. Đợi Docker khởi động (biểu tượng cá voi ở thanh menu chuyển sang xanh)
+
+#### 🪟 Windows:
+
+1. Truy cập: https://www.docker.com/products/docker-desktop/
+2. Click **"Download for Windows"**
+3. Chạy file `.exe` đã tải
+4. **Quan trọng**: Đảm bảo chọn **"Use WSL 2 instead of Hyper-V"**
+5. Làm theo hướng dẫn cài đặt
+6. Restart máy tính khi được yêu cầu
+7. Mở Docker Desktop và đợi khởi động
+
+> [!WARNING]
+> **Windows cần bật WSL2:**
+> - Nếu chưa có WSL2, Docker Desktop sẽ hướng dẫn bạn cài
+> - Hoặc mở PowerShell (Run as Administrator) và chạy: `wsl --install`
+
+#### 🐧 Linux (Ubuntu):
+
+```bash
+# Cập nhật packages
+sudo apt-get update
+
+# Cài đặt packages cần thiết
+sudo apt-get install ca-certificates curl gnupg
+
+# Tải và cài Docker Desktop
+# Xem chi tiết tại: https://docs.docker.com/desktop/install/linux-install/
 ```
-ePACK/
-├── images/
-│   ├── epack-backend.tar       (1.1GB)
-│   └── epack-frontend.tar      (207MB)
-├── scripts/
-│   ├── setup_prod.sh           ⭐ CHẠY ĐẦU TIÊN
-│   ├── start.sh                ⭐ CHẠY SAU setup
-│   ├── stop.sh
-│   ├── update.sh
-│   └── ...
-├── docker-compose.yml
-├── .env.docker.example
-└── README.md
+
+### Kiểm Tra Docker Đã Hoạt Động
+
+Sau khi cài xong, mở Terminal (macOS/Linux) hoặc Command Prompt (Windows) và chạy:
+
+```bash
+docker --version
 ```
 
+**Kết quả mong đợi:**
+```
+Docker version 24.x.x, build xxxxxxx
+```
+
+> [!NOTE]
+> Nếu thấy lỗi "docker command not found", hãy mở Docker Desktop và đợi nó khởi động hoàn toàn.
+
 ---
 
-## Bước 1: Giải Nén Package
+## � Khuyến Cáo: Dùng ChatGPT Atlas Để Hỗ Trợ Cài Đặt
 
-Giải nén ePACK.zip vào thư mục mong muốn:
-- macOS/Linux: ~/ePACK hoặc /opt/epack
-- Windows: C:\ePACK
+> [!TIP]
+> **Cách hiệu quả nhất để cài đặt ePACK:**
+
+### Bước thực hiện:
+
+1. **Mở ChatGPT Atlas** (extension đã cài ở Bước 0)
+
+2. **Upload file hướng dẫn:**
+   - Click vào biểu tượng 📎 (attach file) trong ChatGPT
+   - Chọn file `INSTALLATION.md` này
+   - Hoặc copy toàn bộ nội dung file và paste vào chat
+
+3. **Yêu cầu hướng dẫn:**
+   ```
+   Tôi muốn cài đặt ePACK. Hãy hướng dẫn tôi từng bước 
+   theo file hướng dẫn này. Máy tôi dùng [macOS/Windows].
+   ```
+
+4. **Làm theo hướng dẫn của ChatGPT Atlas:**
+   - AI sẽ hỏi bạn các câu hỏi để hiểu tình huống
+   - Hướng dẫn từng bước phù hợp với máy của bạn
+   - Giải đáp ngay khi gặp lỗi
+
+### Lợi ích:
+
+| Tự cài đặt | Dùng ChatGPT Atlas |
+|------------|-------------------|
+| Đọc tài liệu dài | AI tóm tắt bước cần làm |
+| Gặp lỗi không biết xử lý | AI giải thích và đưa ra giải pháp |
+| Phải Google nhiều | Hỏi trực tiếp, câu trả lời ngay |
+| Mất 30-60 phút | Tiết kiệm 50% thời gian |
 
 ---
 
-## Bước 2: Mở Terminal / Command Prompt
+## 📦 Bước 2: Giải Nén Package ePACK
 
-### 🍎 macOS:
-**Chạy file .sh bằng Terminal:**
-1. Click chuột phải vào file `setup_prod.sh` (hoặc `start.sh`)
+1. Tải file **ePACK.zip** (được cung cấp)
+
+2. Giải nén vào thư mục:
+   - **macOS/Linux:** `~/ePACK` hoặc `/opt/epack`
+   - **Windows:** `C:\ePACK`
+
+3. Sau khi giải nén, cấu trúc thư mục:
+   ```
+   ePACK/
+   ├── images/
+   │   ├── epack-backend.tar       (1.1GB)
+   │   └── epack-frontend.tar      (207MB)
+   ├── scripts/
+   │   ├── setup_prod.sh           ⭐ Chạy đầu tiên (macOS/Linux)
+   │   ├── setup_prod.bat          ⭐ Chạy đầu tiên (Windows)
+   │   ├── start.sh / start.bat
+   │   └── stop.sh / stop.bat
+   ├── docker-compose.yml
+   └── README.md
+   ```
+
+---
+
+## ⚙️ Bước 3: Chạy Setup (Chỉ 1 Lần Duy Nhất)
+
+> [!IMPORTANT]
+> Script setup chỉ cần chạy **MỘT LẦN** khi cài đặt lần đầu.
+
+### 🍎 macOS/Linux:
+
+**Cách 1 - Click chuột:**
+1. Click chuột phải vào file `setup_prod.sh` trong thư mục `scripts/`
 2. Chọn **"Open With"** → **"Other..."**
-3. Trong cửa sổ mở ra, chọn **"All Applications"** (ở dưới cùng)
+3. Chọn **"All Applications"** (ở dưới cùng)
 4. Tìm và chọn **Terminal** → Click **Open**
 
-> 💡 **Tip:** Sau lần đầu, Terminal sẽ xuất hiện trong menu "Open With"
-
-### 🪟 Windows:
-**Chạy file .bat:**
-1. Double-click vào file `setup_prod.bat` (hoặc `start.bat`)
-2. Nếu có cảnh báo SmartScreen, chọn **"More info"** → **"Run anyway"**
-
-> 💡 **Tip:** Hoặc click chuột phải → **"Run as administrator"** nếu cần quyền admin
-
----
-
-## Bước 3: Chạy Setup (1 lần duy nhất)
-
-### macOS/Linux:
+**Cách 2 - Terminal:**
 ```bash
 cd ~/ePACK
 ./scripts/setup_prod.sh
 ```
 
-### Windows:
-```batch
-cd C:\ePACK
-.\scripts\setup_prod.bat
-```
+### 🪟 Windows:
 
-**Script sẽ tự động:**
-- ✅ Tạo file .env từ template
-- ✅ Generate SECRET_KEY (64 chars)
-- ✅ Generate ENCRYPTION_KEY (44 chars)
-- ✅ Cấu hình data directory: ~/docker/volumes/epack
+1. Double-click vào file `setup_prod.bat` trong thư mục `scripts/`
+2. Nếu có cảnh báo SmartScreen:
+   - Click **"More info"**
+   - Click **"Run anyway"**
 
 **Kết quả mong đợi:**
 ```
-Working directory: /path/to/ePACK
 === ePACK Production Setup ===
 Creating .env from template...
 Generating security keys...
@@ -89,47 +234,29 @@ Securing .env file...
 
 ---
 
-## Bước 4: Khởi Động ePACK
+## 🚀 Bước 4: Khởi Động ePACK
 
-### macOS/Linux:
+### 🍎 macOS/Linux:
 ```bash
 ./scripts/start.sh
 ```
 
-### Windows:
-```batch
-.\scripts\start.bat
-```
+### 🪟 Windows:
+Double-click vào `start.bat`
 
-**Script sẽ:**
-- ✅ Load images từ tar files (lần đầu ~2-3 phút)
-- ✅ Tạo Docker network: epack-network
-- ✅ Start containers: epack-backend, epack-frontend
-- ✅ Health check
-- ✅ Tạo runtime folders tại ~/docker/volumes/epack/
+**Đợi khoảng 2-3 phút** (lần đầu load images)
 
 **Kết quả mong đợi:**
 ```
-Working directory: /path/to/ePACK
 🚀 ePACK Docker - Starting Application Stack
 
-📦 Checking Docker images...
 📦 Loading backend image from tar...
-Loaded image: epack-backend:latest
 ✅ Backend image loaded
 📦 Loading frontend image from tar...
-Loaded image: epack-frontend:latest
 ✅ Frontend image loaded
-✅ Docker images ready
 
 🚀 Starting ePACK Application...
-
 ✅ ePACK stack started successfully
-
-📊 Container Status:
-NAME             IMAGE                   STATUS
-epack-backend    epack-backend:latest    Up (healthy)
-epack-frontend   epack-frontend:latest   Up (healthy)
 
 🌐 Access URLs:
    Frontend:  http://localhost:3000
@@ -140,175 +267,50 @@ epack-frontend   epack-frontend:latest   Up (healthy)
 
 ---
 
-## Bước 5: Truy Cập Ứng Dụng
+## 🌐 Bước 5: Truy Cập Ứng Dụng
 
-Mở browser: **http://localhost:3000**
+Mở trình duyệt và truy cập: **http://localhost:3000**
 
-Lần đầu sẽ thấy trang signup/authentication.
-
----
-
-## Bước 6: Dừng ePACK (Khi Cần)
-
-### macOS/Linux:
-```bash
-./scripts/stop.sh
-```
-
-### Windows:
-```batch
-.\scripts\stop.bat
-```
-
-**Data sẽ được giữ lại** tại ~/docker/volumes/epack/
+Bạn sẽ thấy trang đăng nhập/đăng ký của ePACK.
 
 ---
 
-## Bước 7: Khởi Động Lại
+## 🛑 Dừng và Khởi Động Lại
 
-Sau khi stop, chỉ cần chạy lại:
+### Dừng ePACK:
+- **macOS/Linux:** `./scripts/stop.sh`
+- **Windows:** Double-click `stop.bat`
 
-```bash
-./scripts/start.sh
-```
+### Khởi động lại:
+- **macOS/Linux:** `./scripts/start.sh`
+- **Windows:** Double-click `start.bat`
 
-**KHÔNG CẦN** chạy lại setup_prod.sh!
-
----
-
-## Các Lệnh Hữu Ích
-
-### Xem logs:
-```bash
-./scripts/logs.sh           # Tất cả logs
-./scripts/logs.sh backend   # Chỉ backend
-./scripts/logs.sh frontend  # Chỉ frontend
-```
-
-### Kiểm tra trạng thái:
-```bash
-./scripts/status.sh
-```
-
-### Update/Restart:
-```bash
-./scripts/update.sh
-```
+> [!NOTE]
+> **KHÔNG CẦN** chạy lại `setup_prod.sh/bat` khi khởi động lại. Setup chỉ chạy 1 lần duy nhất.
 
 ---
 
-## Thư Mục Data
-
-Sau khi start lần đầu, data được lưu tại:
-
-### macOS/Linux:
-```
-~/docker/volumes/epack/
-├── database/           # SQLite databases
-├── logs/              # Application logs
-├── sessions/          # User sessions
-├── cache/             # Cache files
-├── uploads/           # Uploaded files
-├── output/            # Processed videos
-└── input/             # Video sources (configured later)
-```
-
-### Windows:
-```
-C:\Users\<YourName>\docker\volumes\epack\
-```
-
----
-
-## Xử Lý Sự Cố
-
-### Lỗi: "Docker is not running"
-**Giải pháp:** Mở Docker Desktop và đợi khởi động
-
-### Lỗi: "Port 3000 already in use"
-**Giải pháp:** Dừng ứng dụng đang dùng port 3000
-```bash
-# macOS/Linux:
-lsof -i :3000
-kill -9 <PID>
-
-# Windows:
-netstat -ano | findstr :3000
-taskkill /PID <PID> /F
-```
-
-### Lỗi: "Backend image not found"
-**Giải pháp:** Kiểm tra file images/epack-backend.tar có tồn tại
-```bash
-ls -lh images/
-```
-
-### Reset về trạng thái ban đầu:
-```bash
-# Stop containers
-./scripts/stop.sh --volumes  # Xóa cả data
-
-# Xóa .env
-rm .env
-
-# Chạy lại setup
-./scripts/setup_prod.sh
-
-# Start lại
-./scripts/start.sh
-```
-
----
-
-## Docker Desktop Verification
-
-Sau khi start, mở **Docker Desktop**:
-
-**Containers tab phải thấy:**
-- Project: **epack** ✅
-- Containers:
-  - **epack-backend** (green, healthy)
-  - **epack-frontend** (green, healthy)
-
-**Images tab phải thấy:**
-- **epack-backend:latest** (1.1GB)
-- **epack-frontend:latest** (207MB)
-
-**Volumes tab phải thấy:**
-- epack_database
-- epack_logs
-- epack_sessions
-- epack_cache
-- ... (các volumes khác)
-
----
-
-## FAQ
+## ❓ FAQ - Câu Hỏi Thường Gặp
 
 **Q: Có cần cài Python hay Node.js không?**
 A: Không. Tất cả đã có trong Docker images.
 
-**Q: Có cần internet để start không?**
-A: Không. Images đã có trong tar files. Chỉ cần internet cho Google OAuth (lúc login).
+**Q: Có cần internet để chạy không?**
+A: Không cần (chỉ cần internet khi đăng nhập Google OAuth).
 
-**Q: Có thể chạy trên Windows 11 Home không?**
-A: Có, với Docker Desktop + WSL2.
+**Q: Data có mất khi tắt containers không?**
+A: Không. Data được lưu an toàn tại `~/docker/volumes/epack/`
 
-**Q: Data có mất khi stop containers không?**
-A: Không. Data lưu tại ~/docker/volumes/epack/ và được preserve.
+**Q: Gặp lỗi "Docker is not running"?**
+A: Mở Docker Desktop và đợi nó khởi động hoàn toàn.
 
-**Q: Có thể di chuyển folder ePACK sang máy khác không?**
-A: Có, nhưng cần copy cả folder ~/docker/volumes/epack/ (data).
-
-**Q: Làm sao backup data?**
-A: Backup folder ~/docker/volumes/epack/
-```bash
-tar -czf epack-backup-$(date +%Y%m%d).tar.gz ~/docker/volumes/epack
-```
+**Q: Gặp lỗi "Port 3000 already in use"?**
+A: Đóng ứng dụng khác đang dùng port 3000, hoặc hỏi ChatGPT Atlas cách xử lý.
 
 ---
 
-## Hỗ Trợ
+## 🆘 Cần Hỗ Trợ?
 
-- **Documentation**: /docs/user-friendly/
-- **Health Check**: http://localhost:8080/health
+1. **Dùng ChatGPT Atlas** - Insert file này và yêu cầu hỗ trợ
+2. **Xem User Guide** - `/docs/user-friendly/`
+3. **Health Check** - http://localhost:8080/health

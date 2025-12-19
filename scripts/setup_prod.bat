@@ -41,13 +41,24 @@ for /f "delims=" %%i in ('powershell -Command "$bytes = new-object byte[] 32; (n
 echo Updating configuration...
 powershell -Command "(Get-Content .env) -replace '<REPLACE_WITH_YOUR_SECRET_KEY>', '%SECRET_KEY%' -replace '<REPLACE_WITH_YOUR_ENCRYPTION_KEY>', '%ENCRYPTION_KEY%' | Set-Content .env"
 
+:: 5. Add EPACK_INSTALL_DIR to .env
+echo. >> .env
+echo # Installation directory for auto-restart >> .env
+echo EPACK_INSTALL_DIR=%CD% >> .env
+
+:: 6. Add scripts mount to docker-compose.yml
+echo Adding scripts mount to docker-compose.yml...
+powershell -Command "if (-not (Select-String -Path docker-compose.yml -Pattern './scripts:/app/scripts' -Quiet)) { (Get-Content docker-compose.yml) -replace '      - ./.env:/app/.env:rw', '      - ./.env:/app/.env:rw`n      - ./scripts:/app/scripts:ro' | Set-Content docker-compose.yml; Write-Host 'Scripts mount added' } else { Write-Host 'Scripts mount already exists' }"
+
 echo.
 echo ========================================================
 echo                 Setup Complete!
 echo ========================================================
 echo 1. Configuration saved to: .env
 echo 2. Secret keys generated and applied.
-echo 3. You can now start the application with:
-echo    docker-compose up -d
+echo 3. Scripts mount added for auto-restart capability.
 echo.
-pause
+
+:: 7. Auto-start ePACK
+echo Starting ePACK automatically...
+call scripts\start.bat
