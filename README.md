@@ -9,6 +9,9 @@ Theo chính sách bảo mật, mã nguồn và kịch bản cài đặt của eP
 
 👉 **[Tải bản ePACK mới nhất tại đây](https://github.com/Binhnguyen041280/ePACK_packet/releases/latest)**
 
+> [!TIP]
+> **Dành cho macOS**: Nếu gặp thông báo "Apple không thể xác minh...", hãy **Chuột phải (Right-click)** vào file `.command` và chọn **Open** để chạy.
+
 ### 📦 Nội dung gói cài đặt
 Sau khi giải nén file `.zip`, bạn sẽ nhận được:
 - `SETUP_MACOS.command` / `SETUP_WINDOWS.bat`: Trình cài đặt tự động.
