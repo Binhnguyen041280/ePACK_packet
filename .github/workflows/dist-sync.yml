@@ -1,0 +1,72 @@
+name: Distribution Update Hook
+
+on:
+  repository_dispatch:
+    types: [vtrack-new-release]
+
+jobs:
+  update-distribution:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout distribution repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Update Version in files
+        run: |
+          NEW_TAG="${{ github.event.client_payload.version }}"
+          echo "Updating to version $NEW_TAG"
+          
+          # Update docker-compose.yml image tags
+          sed -i "s|epack-backend:v[0-9.]*|epack-backend:$NEW_TAG|g" docker-compose.yml
+          sed -i "s|epack-frontend:v[0-9.]*|epack-frontend:$NEW_TAG|g" docker-compose.yml
+          
+          # Fix license URL (just in case)
+          sed -i 's|license_service|license-service|g' .env.docker.example
+
+      - name: Create Distribution Package
+        run: |
+          NEW_TAG="${{ github.event.client_payload.version }}"
+          ZIP_NAME="ePACK_${NEW_TAG}_Clean.zip"
+          
+          # Root wrappers
+          cat << 'EOF' > SETUP_MACOS.command
+          #!/bin/bash
+          cd "$(dirname "$0")"
+          chmod +x scripts/*.sh
+          ./scripts/setup_prod.sh
+          EOF
+          chmod +x SETUP_MACOS.command
+          
+          # Create zip
+          zip -r "$ZIP_NAME" . -x "*.git*" "*.env" "*.DS_Store" "*.bak" "*.zip" "release_notes.md"
+
+      - name: Commit and Push Changes
+        run: |
+          NEW_TAG="${{ github.event.client_payload.version }}"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add docker-compose.yml .env.docker.example
+          git commit -m "chore: sync distribution files for version $NEW_TAG" || echo "No changes to commit"
+          git tag "$NEW_TAG"
+          git push origin main
+          git push origin "$NEW_TAG"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.client_payload.version }}
+          files: ePACK_${{ github.event.client_payload.version }}_Clean.zip
+          name: ePACK ${{ github.event.client_payload.version }}
+          body: |
+            ### Automated Release Sync from V_Track
+            - Version: `${{ github.event.client_payload.version }}`
+            - Build ID: `${{ github.event.client_payload.run_id }}`
+            - Build completed at: `${{ github.event.client_payload.timestamp }}`
+            
+            This is an automated distribution package.
+          draft: false
+          prerelease: false
