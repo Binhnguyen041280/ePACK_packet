@@ -9,6 +9,16 @@ cd "$PROJECT_ROOT"
 
 echo "🔄 ePACK Configuration Update"
 echo "============================="
+
+# Detect Docker Compose version
+if docker compose version >/dev/null 2>&1; then
+    DOCKER_COMPOSE="docker compose"
+elif docker-compose version >/dev/null 2>&1; then
+    DOCKER_COMPOSE="docker-compose"
+else
+    # Allow fallback if scripts use their own detection, but better to check here
+    true
+fi
 echo "Stopping services..."
 ./scripts/stop.sh
 

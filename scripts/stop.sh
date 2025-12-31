@@ -13,6 +13,16 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 cd "$PROJECT_ROOT"
 set -e
 
+# Detect Docker Compose version
+if docker compose version >/dev/null 2>&1; then
+    DOCKER_COMPOSE="docker compose"
+elif docker-compose version >/dev/null 2>&1; then
+    DOCKER_COMPOSE="docker-compose"
+else
+    echo -e "${RED}❌ Error: Docker Compose not found.${NC}"
+    exit 1
+fi
+
 # Colors for output
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -67,7 +77,7 @@ done
 
 # Build docker-compose command
 echo -e "${YELLOW}Stopping ePACK services...${NC}"
-COMPOSE_CMD="docker-compose down"
+COMPOSE_CMD="$DOCKER_COMPOSE down"
 
 if [ "$REMOVE_ORPHANS" = true ]; then
     COMPOSE_CMD="$COMPOSE_CMD --remove-orphans"

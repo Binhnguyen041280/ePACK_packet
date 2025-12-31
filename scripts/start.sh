@@ -14,6 +14,16 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 cd "$PROJECT_ROOT"
 echo "Working directory: $PROJECT_ROOT"
 
+# Detect Docker Compose version
+if docker compose version >/dev/null 2>&1; then
+    DOCKER_COMPOSE="docker compose"
+elif docker-compose version >/dev/null 2>&1; then
+    DOCKER_COMPOSE="docker-compose"
+else
+    echo -e "${RED}❌ Error: Docker Compose not found.${NC}"
+    exit 1
+fi
+
 # Colors for output
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -81,7 +91,7 @@ done
 # Start services
 echo -e "${BLUE}🚀 Starting ePACK Application...${NC}"
 echo ""
-docker-compose up $DETACHED
+$DOCKER_COMPOSE up $DETACHED
 
 # If running in detached mode, show status
 if [ ! -z "$DETACHED" ]; then
@@ -89,7 +99,7 @@ if [ ! -z "$DETACHED" ]; then
     echo -e "${GREEN}✅ ePACK stack started successfully${NC}"
     echo ""
     echo -e "${BLUE}📊 Container Status:${NC}"
-    docker-compose ps
+    $DOCKER_COMPOSE ps
     echo ""
     echo -e "${BLUE}🌐 Access URLs:${NC}"
     echo -e "   Frontend:  ${GREEN}http://localhost:3000${NC}"

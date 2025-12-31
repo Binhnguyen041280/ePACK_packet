@@ -11,6 +11,16 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 
 # Change to project root directory
 cd "$PROJECT_ROOT"
+
+# Detect Docker Compose version
+if docker compose version >/dev/null 2>&1; then
+    DOCKER_COMPOSE="docker compose"
+elif docker-compose version >/dev/null 2>&1; then
+    DOCKER_COMPOSE="docker-compose"
+else
+    echo -e "${RED}❌ Error: Docker Compose not found.${NC}"
+    exit 1
+fi
 set -e
 
 # Colors for output
@@ -42,7 +52,7 @@ if [ $RUNNING -eq 0 ]; then
     echo -e "${YELLOW}⚠️  No containers running${NC}"
     echo -e "${YELLOW}   Start with: ./start.sh${NC}"
 else
-    docker-compose ps
+    $DOCKER_COMPOSE ps
     echo ""
 
     # Show resource usage
@@ -142,7 +152,7 @@ echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━�
 if [ $RUNNING -gt 0 ]; then
     echo "  View logs:      ./logs.sh"
     echo "  Stop services:  ./stop.sh"
-    echo "  Restart:        docker-compose restart"
+    echo "  Restart:        $DOCKER_COMPOSE restart"
     echo "  Shell (backend): docker exec -it vtrack-backend bash"
 else
     echo "  Start services: ./start.sh"
