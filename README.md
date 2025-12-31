@@ -1,44 +1,20 @@
-# ePACK - Video Tracking Solution
+# ePACK Distribution Package
 
-> **📦 Distribution Repository**  
-> This repository is used **only for distributing installation packages**.  
-> It does **not** contain application source code or runtime secrets.
+Chào mừng bạn đến với kênh phân phối chính thức của **ePACK**.
 
----
+Theo chính sách bảo mật, mã nguồn và kịch bản cài đặt của ePACK không được lưu trữ trực tiếp trên repository công khai này.
 
-## 📥 Download
+### 🚀 Hướng dấn tải và cài đặt
+Để tải bộ cài đặt ePACK mới nhất (bao gồm script cho Win/Mac và cấu hình Docker), vui lòng truy cập mục **Releases**:
 
-**[⬇️ Download Latest Release](https://github.com/Binhnguyen041280/ePACK_packet/releases/latest)**
+👉 **[Tải bản ePACK mới nhất tại đây](https://github.com/Binhnguyen041280/ePACK_packet/releases/latest)**
 
----
-
-## 🚀 Installation
-
-1. Download `ePACK_vX.X.X.zip` from [Releases](https://github.com/Binhnguyen041280/ePACK_packet/releases)
-2. Extract the zip file
-3. Follow `INSTALLATION.md` inside the package
+### 📦 Nội dung gói cài đặt
+Sau khi giải nén file `.zip`, bạn sẽ nhận được:
+- `SETUP_MACOS.command` / `SETUP_WINDOWS.bat`: Trình cài đặt tự động.
+- `UPDATE_VERSION`: Công cụ cập nhật phiên bản.
+- `docker-compose.yml`: Cấu hình hệ thống.
+- Thư mục `scripts/`: Chứa các công cụ hỗ trợ.
 
 ---
-
-## ✨ Features
-
-- 📹 Video processing & tracking
-- 📊 Marketplace Fee Calculator (Shopee)
-- 🔄 Auto-restart after configuration
-- 🐳 Docker-based deployment
-
----
-
-## 📧 Support
-
-For support, please contact the development team.
-
----
-
-## ⚠️ Notice
-
-This repository contains **only**:
-- Release packages (zip files with Docker images)
-- Installation documentation
-
-**No source code, API keys, or secrets are stored in this repository.**
+© 2025 Binhnguyen041280. All rights reserved.
